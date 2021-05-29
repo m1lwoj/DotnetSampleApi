@@ -22,18 +22,34 @@ namespace DotnetSampleApi.Controllers
         {
             _logger = logger;
         }
-
+        //
+        // [HttpGet]
+        // public IEnumerable<WeatherForecast> Get()
+        // {
+        //     var rng = new Random();
+        //     return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        //     {
+        //         Date = DateTime.Now.AddDays(index),
+        //         TemperatureC = rng.Next(-20, 55),
+        //         Summary = Summaries[rng.Next(Summaries.Length)]
+        //     })
+        //     .ToArray();
+        // }
+        
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public WeatherForecast GetForecastsForDay(DateTime day)
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return new WeatherForecast
             {
-                Date = DateTime.Now.AddDays(index),
+                Date = day,
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            };
         }
+
+        [HttpPost]
+        public IActionResult CreateForecastForDay(WeatherForecast forecast)
+            => Created($"weatherforecast/{forecast.Date:yyyy-MM-dd}", forecast);
     }
 }

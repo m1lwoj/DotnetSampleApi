@@ -1,4 +1,4 @@
-//using DotnetSampleApi2;
+//using TourApi;
 //using Newtonsoft.Json;
 //using NUnit.Framework;
 //using PactNet;

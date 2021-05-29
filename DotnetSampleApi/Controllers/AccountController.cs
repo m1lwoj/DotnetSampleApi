@@ -13,11 +13,6 @@ namespace DotnetSampleApi.Controllers
             _random = new Random();
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpPost]
         public IActionResult CreateAccount(string login, string password)
         {
