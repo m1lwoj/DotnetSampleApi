@@ -5,6 +5,7 @@ using PactNet.Mocks.MockHttpService.Models;
 using Consumer;
 using System.Collections.Generic;
 using DotnetSampleApi2;
+using PactNet.Matchers;
 
 namespace tests
 {
@@ -59,11 +60,11 @@ namespace tests
         [Fact]
         public void ItParsesForecastsForDay2()
         {
-            var expectedDate = DateTime.UtcNow;
+            var expectedDate = new DateTime(2020, 2, 2);
         
             // Arrange
-            _mockProviderService.Given("There is data")
-                .UponReceiving("A valid GET request for Date Validation2")
+            _mockProviderService.Given("Can get forecasts data")
+                .UponReceiving("A valid GET request for Date Validation6")
                 .With(new ProviderServiceRequest 
                 {
                     Method = HttpVerb.Get,
@@ -78,9 +79,9 @@ namespace tests
                     },
                     Body = new 
                     {
-                        date = expectedDate,
-                        temperatureC = default(int),
-                        temperatureF = default(int),
+                        date = $"{expectedDate:yyyy-MM-ddThh:mm:ssZ}",
+                        temperatureC = Match.Type(1),
+                        temperatureF = Match.Type(1)
                     }
                 });
         
