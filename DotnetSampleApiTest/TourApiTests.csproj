@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DotnetSampleApi3\DotnetSampleApi3.csproj" />
+    <ProjectReference Include="..\TourApi\TourApi.csproj" />
   </ItemGroup>
 
 </Project>

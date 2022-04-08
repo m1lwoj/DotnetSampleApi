@@ -14,20 +14,13 @@ namespace DotnetSampleApi2.Controllers
     [Route("[controller]")]
     public class TourController : ControllerBase
     {
+        private string _weatherForecastsApiUrl;
+
         public TourController(IConfiguration configuration, ILogger<TourController> logger)
         {
             _weatherForecastsApiUrl = configuration.GetValue<string>("WeatherForecastsApiUrl");
-            _logger = logger;
         }
         
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bryacing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<TourController> _logger;
-        private string _weatherForecastsApiUrl;
-
         [HttpGet]
         [Route("{date}")]
         public async Task<TourPlan> GetPlanForDay(DateTime date)

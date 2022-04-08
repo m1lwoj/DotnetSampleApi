@@ -1,4 +1,4 @@
-﻿using DotnetSampleApi;
+﻿using DotnetSampleApi2;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,40 +45,28 @@ namespace DotnetSampleApiTest
         }
 
         [Fact]
-        public async Task EnsureSomethingApiHonoursPactWithConsumer()
+        public void Ensure()
         {
             IPactVerifier pactVerifier = new PactVerifier(new PactVerifierConfig
             {
-                Outputters = new List<IOutput> //NOTE: We default to using a ConsoleOutput, however xUnit 2 does not capture the console output, so a custom outputter is required.
+                Outputters = new List<IOutput> 
 				{
                     new XUnitOutput(_outputHelper)
                 },
-                Verbose = true //Output verbose verification logs to the test output
+                Verbose = true 
             });
-            ///XXXX testowanie provider
-
-            //HttpClient client = _testServer.CreateClient();
-            //HttpResponseMessage response = await client.GetAsync($"/WeatherForecast?day={DateTime.UtcNow:yyyy-MM-ddThh:mm:ssZ}");
-            //var aa = response.StatusCode;
-            //string responseHtml = await response.Content.ReadAsStringAsync();
 
             //Arrange
             //Act / Assert
             pactVerifier
-                //.ProviderState($"{_pactServiceUri}/provider-states")
-                .ServiceProvider("Something API", _pactServiceUri) //NOTE: You can also use your own client by using the ServiceProvider method which takes a Func<ProviderServiceRequest, ProviderServiceResponse>. You are then responsible for mapping and performing the actual provider verification HTTP request within that Func.
+                .ServiceProvider("Something API", _pactServiceUri) 
                 .HonoursPactWith("TourApi")
                 .PactUri("D:/Projekty/pacts_new/pactss/tourapi-weatherforecastapi.json")
-                //or
-                .Verify(); //NOTE: Optionally you can control what interactions are verified by specifying a providerDescription and/or providerState
-        }
-
-        private void AddTesterIfItDoesntExist()
-        {
-            //Logic to add the 'tester' something
+                .Verify(); 
         }
 
         #region IDisposable Support
+
         private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
@@ -216,21 +204,16 @@ namespace DotnetSampleApiTest
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseMiddleware<ProviderStateMiddleware>();
             app.UseRouting();
             app.UseEndpoints(e => e.MapControllers());
-
-            //app.UseMiddleware<ProviderStateMiddleware>();
-            //app.UseMvc();
         }
     }
 }

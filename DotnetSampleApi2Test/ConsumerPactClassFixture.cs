@@ -3,7 +3,7 @@ using Xunit;
 using PactNet;
 using PactNet.Mocks.MockHttpService;
 
-namespace tests
+namespace WeatherApiTests
 {
     // This class is responsible for setting up a shared
     // mock server for Pact used by all the tests.
@@ -23,7 +23,7 @@ namespace tests
             var pactConfig = new PactConfig
             {
                 SpecificationVersion = "2.0.0",
-                PactDir = @"..\..\..\..\..\pactss",
+                PactDir = @"D:\Projekty\pacts_new\pactss",
                 LogDir = @".\pact_logs"
             };
 
