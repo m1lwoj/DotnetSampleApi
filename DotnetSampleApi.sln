@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31229.75
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourApi", "TourApi\TourApi.csproj", "{503EC646-2393-491B-B1F7-49C48D207910}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi", "DotnetSampleApi3\WeatherApi.csproj", "{2BF9CCFD-53E2-4FB1-B3FB-5456A69BCDB5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourApiTests", "DotnetSampleApiTest\TourApiTests.csproj", "{CFA9244C-910A-45E1-A3BB-290C2E3222C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApiTestsProvider", "DotnetSampleApiTest\WeatherApiTestsProvider.csproj", "{CFA9244C-910A-45E1-A3BB-290C2E3222C9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApiTests", "DotnetSampleApi2Test\WeatherApiTests.csproj", "{94849059-FA57-4556-AC3C-AFE71F95963A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourApiTestsConsumer", "DotnetSampleApi2Test\TourApiTestsConsumer.csproj", "{94849059-FA57-4556-AC3C-AFE71F95963A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

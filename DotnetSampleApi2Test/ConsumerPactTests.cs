@@ -5,6 +5,8 @@ using PactNet.Mocks.MockHttpService.Models;
 using Consumer;
 using System.Collections.Generic;
 using PactNet.Matchers;
+using DotnetSampleApi2;
+using DotnetSampleApi2.ApiClients.Models;
 
 namespace WeatherApiTests
 {
@@ -20,40 +22,134 @@ namespace WeatherApiTests
             _mockProviderServiceBaseUri = fixture.MockProviderServiceBaseUri;
         }
 
+
         [Fact]
-        public void ItParsesForecastsForDay()
+        public void ItParseForecastForDay()
         {
-            var expectedDate = new DateTime(2020, 2, 2);
-        
+            var expectedDate = new DateTime(2020, 2, 2).Date;
+
             // Arrange
-            _mockProviderService.Given("Can get forecasts data")
-                .UponReceiving("A valid GET request for Date Validation6")
-                .With(new ProviderServiceRequest 
+            _mockProviderService.Given("Can get forecasts data for given date")
+                .UponReceiving("A valid GET request for GetForecsastForDay")
+                .With(new ProviderServiceRequest
                 {
                     Method = HttpVerb.Get,
-                    Path = "/WeatherForecast",
-                    Query = $"day={expectedDate:yyyy-MM-ddThh:mm:ssZ}",
+                    Path = $"/WeatherForecast/{expectedDate:yyyy-MM-dd}"
                 })
-                .WillRespondWith(new ProviderServiceResponse {
+                .WillRespondWith(new ProviderServiceResponse
+                {
                     Status = 200,
                     Headers = new Dictionary<string, object>
                     {
                         { "Content-Type", "application/json; charset=utf-8" }
                     },
-                    Body = new 
+                    Body = new
                     {
-                        date = $"{expectedDate:yyyy-MM-ddThh:mm:ssZ}",
+                        date = $"{expectedDate:yyyy-MM-ddTHH:mm:ss}",
                         temperatureC = Match.Type(1),
                         temperatureF = Match.Type(1)
                     }
                 });
-        
+
+            // Act
+            var result = WeatherForecastsApiClient.GetForecastsForDay(expectedDate, _mockProviderServiceBaseUri).GetAwaiter().GetResult();
+            var resultBody = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            //Aly URL
+            // Assert
+            Assert.NotEqual(System.Net.HttpStatusCode.InternalServerError, result.StatusCode);
+            Assert.Contains(expectedDate.ToString("yyyy-MM-dd"), resultBody);
+        }
+
+        [Fact]
+        public void ItParseForecast()
+        {
+            var expectedDate = DateTime.UtcNow.Date;
+
+            // Arrange
+            _mockProviderService.Given("Can get forecasts data for current date")
+                .UponReceiving("A valid GET request for Forecast")
+                .With(new ProviderServiceRequest
+                {
+                    Method = HttpVerb.Get,
+                    Path = "/WeatherForecast",
+                })
+                .WillRespondWith(new ProviderServiceResponse
+                {
+                    Status = 200,
+                    Headers = new Dictionary<string, object>
+                    {
+                        { "Content-Type", "application/json; charset=utf-8" }
+                    },
+                    Body = new
+                    {
+                        date = $"{expectedDate:yyyy-MM-ddTHH:mm:ssZ}",
+                        temperatureC = Match.Type(1),
+                        temperatureF = Match.Type(1)
+                    }
+                });
+
             // Act
             var result = WeatherForecastsApiClient.GetForecastsForDay2(expectedDate, _mockProviderServiceBaseUri).GetAwaiter().GetResult();
             var resultBody = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-        
+
             // Assert
-            Assert.Contains(expectedDate.ToString("yyyy-MM-dd"), resultBody);
+            Assert.NotNull(resultBody);
+        }
+
+
+        [Fact]
+        public void ItCanAddWeatherForecast()
+        {
+            var expectedDate = new DateTime(2020, 1, 2).Date;
+            var model = new 
+            {
+                date = expectedDate,
+                summary = "Bad weather",
+                temperatureC = 12
+            };
+
+            var modelToSend = new WeatherForecastRequest
+            {
+                Date = expectedDate,
+                Summary = "Bad weather",
+                TemperatureC = 12
+            };
+
+            // Arrange
+            _mockProviderService.Given("Can post forecasts data")
+                .UponReceiving("A valid POST request for Forecast")
+                .With(new ProviderServiceRequest
+                {
+                    Method = HttpVerb.Post,
+                    Path = "/WeatherForecast",
+                    Headers = new Dictionary<string, object>
+                    {
+                        { "Content-Type", "application/json; charset=utf-8" }
+                    },
+                    Body = model
+                })
+                .WillRespondWith(new ProviderServiceResponse
+                {
+                    Status = 201,
+                    Headers = new Dictionary<string, object>
+                    {
+                        { "Content-Type", "application/json; charset=utf-8" }
+                    },
+                    Body = new
+                    {
+                        date = $"{expectedDate:yyyy-MM-ddTHH:mm:ss}",
+                        temperatureC = Match.Type(modelToSend.TemperatureC),
+                        temperatureF = Match.Type(modelToSend.TemperatureC),
+                        summary = Match.Type(modelToSend.Summary)
+                    }
+                });
+
+            // Act
+            var result = WeatherForecastsApiClient.AddForecast(modelToSend, _mockProviderServiceBaseUri).GetAwaiter().GetResult();
+
+            // Assert
+            Assert.NotNull(result);
         }
     }
 }

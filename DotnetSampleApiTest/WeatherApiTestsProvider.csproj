@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DotnetSampleApi3\WeatherApi.csproj" />
     <ProjectReference Include="..\TourApi\TourApi.csproj" />
   </ItemGroup>
 

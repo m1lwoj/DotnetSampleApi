@@ -1,4 +1,6 @@
-﻿using DotnetSampleApi2;
+﻿//using DotnetSampleApi2;
+//using DotnetSampleApi;
+using DotnetSampleApi;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,7 +22,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace DotnetSampleApiTest
+namespace TourApiTests
 {
     public class UnitTest1
     {
@@ -49,20 +51,20 @@ namespace DotnetSampleApiTest
         {
             IPactVerifier pactVerifier = new PactVerifier(new PactVerifierConfig
             {
-                Outputters = new List<IOutput> 
-				{
+                Outputters = new List<IOutput>
+                {
                     new XUnitOutput(_outputHelper)
                 },
-                Verbose = true 
+                Verbose = true
             });
 
             //Arrange
             //Act / Assert
             pactVerifier
-                .ServiceProvider("Something API", _pactServiceUri) 
+                .ServiceProvider("Something API", _pactServiceUri)
                 .HonoursPactWith("TourApi")
                 .PactUri("D:/Projekty/pacts_new/pactss/tourapi-weatherforecastapi.json")
-                .Verify(); 
+                .Verify();
         }
 
         #region IDisposable Support
@@ -155,12 +157,12 @@ namespace DotnetSampleApiTest
         {
             if (context.Request.Path.Value == "/provider-states")
             {
-                await this.HandleProviderStatesRequestAsync(context);
-                await context.Response.WriteAsync(String.Empty);
+                await HandleProviderStatesRequestAsync(context);
+                await context.Response.WriteAsync(string.Empty);
             }
             else
             {
-                await this._next(context);
+                await _next(context);
             }
         }
 
@@ -171,7 +173,7 @@ namespace DotnetSampleApiTest
             if (context.Request.Method.ToUpper() == HttpMethod.Post.ToString().ToUpper() &&
                 context.Request.Body != null)
             {
-                string jsonRequestBody = String.Empty;
+                string jsonRequestBody = string.Empty;
                 using (var reader = new StreamReader(context.Request.Body, Encoding.UTF8))
                 {
                     jsonRequestBody = await reader.ReadToEndAsync();
@@ -180,7 +182,7 @@ namespace DotnetSampleApiTest
                 var providerState = JsonConvert.DeserializeObject<ProviderState>(jsonRequestBody);
 
                 //A null or empty provider state key must be handled
-                if (providerState != null && !String.IsNullOrEmpty(providerState.State) &&
+                if (providerState != null && !string.IsNullOrEmpty(providerState.State) &&
                     providerState.Consumer == ConsumerName)
                 {
                     _providerStates[providerState.State].Invoke();

@@ -22,21 +22,35 @@ namespace DotnetSampleApi.Controllers
         {
             _logger = logger;
         }
-        
+
+
         [HttpGet]
+        public WeatherForecast GetForecasts()
+        {
+            var rng = new Random();
+            return new WeatherForecast
+            {
+                Date = DateTime.UtcNow.Date,
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            };
+        }
+
+        [HttpGet]
+        [Route("{day}")]
         public WeatherForecast GetForecastsForDay(DateTime day)
         {
             var rng = new Random();
             return new WeatherForecast
             {
-                Date = day,
+                Date = day.Date,
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             };
         }
 
         [HttpPost]
-        public IActionResult CreateForecastForDay(WeatherForecast forecast)
+        public IActionResult CreateForecast(WeatherForecast forecast)
             => Created($"weatherforecast/{forecast.Date:yyyy-MM-dd}", forecast);
     }
 }

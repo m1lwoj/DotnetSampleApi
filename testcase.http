@@ -1,0 +1,27 @@
+GET http://localhost:9222/WeatherForecast?day=2020-02-02 HTTP/1.1
+###
+
+POST http://localhost:9222/WeatherForecast HTTP/1.1
+content-type: application/json; charset=utf-8
+
+{
+    "date": "2020-01-02T00:00:00",
+    "summary": "Bad weather",
+    "temperatureC": 12
+}
+###
+
+GET http://localhost:5000/WeatherForecast/2020-02-02 HTTP/1.1
+###
+
+GET http://localhost:5000/WeatherForecast HTTP/1.1
+###
+
+POST http://localhost:5000/WeatherForecast HTTP/1.1
+content-type: application/json; charset=utf-8
+
+{
+    "date": "2020-01-02T00:00:00",
+    "summary": "Bad weather",
+    "temperatureC": 12
+}
