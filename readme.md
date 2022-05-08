@@ -12,7 +12,10 @@ Mock provider compares actual request with the expected request and emits expect
 https://www.agilepartner.net/en/consumer-driven-contract-testing-made-simple-with-pact-part-2/
 
 TODO:
-- Add POST request (fix models, lower / upper case)
+modify swagger documentation to match generated pact documentation
+
+swagger-mock-validator http://localhost:5000/swagger/v1/swagger.json ..\pacts_new\pactss\tourapi-weatherforecastapi.json
+
 
 # Provider
 WeatherForecastApi

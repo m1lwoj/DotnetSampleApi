@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using PactNet.Matchers;
 using DotnetSampleApi2;
 using DotnetSampleApi2.ApiClients.Models;
+using Newtonsoft.Json;
 
 namespace WeatherApiTests
 {
@@ -34,7 +35,7 @@ namespace WeatherApiTests
                 .With(new ProviderServiceRequest
                 {
                     Method = HttpVerb.Get,
-                    Path = $"/WeatherForecast/{expectedDate:yyyy-MM-dd}"
+                    Path = $"/WeatherForecast/{expectedDate:yyyy-MM-ddTHH:mm:ssZ}"
                 })
                 .WillRespondWith(new ProviderServiceResponse
                 {
@@ -45,7 +46,7 @@ namespace WeatherApiTests
                     },
                     Body = new
                     {
-                        date = $"{expectedDate:yyyy-MM-ddTHH:mm:ss}",
+                        date = $"{expectedDate:yyyy-MM-ddTHH:mm:ssZ}",
                         temperatureC = Match.Type(1),
                         temperatureF = Match.Type(1)
                     }
@@ -102,16 +103,10 @@ namespace WeatherApiTests
         public void ItCanAddWeatherForecast()
         {
             var expectedDate = new DateTime(2020, 1, 2).Date;
-            var model = new 
-            {
-                date = expectedDate,
-                summary = "Bad weather",
-                temperatureC = 12
-            };
 
             var modelToSend = new WeatherForecastRequest
             {
-                Date = expectedDate,
+                Date = $"{expectedDate:yyyy-MM-ddTHH:mm:ssZ}",
                 Summary = "Bad weather",
                 TemperatureC = 12
             };
@@ -127,7 +122,7 @@ namespace WeatherApiTests
                     {
                         { "Content-Type", "application/json; charset=utf-8" }
                     },
-                    Body = model
+                    Body = JsonConvert.DeserializeObject(WeatherForecastsApiClient.ToCamelCaseNotation(modelToSend))
                 })
                 .WillRespondWith(new ProviderServiceResponse
                 {
@@ -138,7 +133,7 @@ namespace WeatherApiTests
                     },
                     Body = new
                     {
-                        date = $"{expectedDate:yyyy-MM-ddTHH:mm:ss}",
+                        date = $"{expectedDate:yyyy-MM-ddTHH:mm:ssZ}",
                         temperatureC = Match.Type(modelToSend.TemperatureC),
                         temperatureF = Match.Type(modelToSend.TemperatureC),
                         summary = Match.Type(modelToSend.Summary)
