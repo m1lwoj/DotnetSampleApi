@@ -1,15 +1,7 @@
 using System;
 
-namespace TourApi
+namespace WeatherApi
 {
-    public class TourPlan
-    {
-        public DateTime Date { get; set; }
-
-        public string Description  { get; set; }
-        public WeatherForecast WeatherForecast  { get; set; }
-    }
-    
     public class WeatherForecast
     {
         public DateTime Date { get; set; }

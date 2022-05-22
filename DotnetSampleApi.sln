@@ -5,11 +5,11 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourApi", "TourApi\TourApi.csproj", "{503EC646-2393-491B-B1F7-49C48D207910}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi", "DotnetSampleApi3\WeatherApi.csproj", "{2BF9CCFD-53E2-4FB1-B3FB-5456A69BCDB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApi", "WeatherForecastsApi\WeatherApi.csproj", "{DC3BF3A4-3466-4EE4-8E2C-016DDF6D18E7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApiTestsProvider", "DotnetSampleApiTest\WeatherApiTestsProvider.csproj", "{CFA9244C-910A-45E1-A3BB-290C2E3222C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherApiTestsProvider", "WeatherApiTestsProvider\WeatherApiTestsProvider.csproj", "{CC2FA00A-6AC2-4E3D-A960-61E9997A33A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourApiTestsConsumer", "DotnetSampleApi2Test\TourApiTestsConsumer.csproj", "{94849059-FA57-4556-AC3C-AFE71F95963A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourApiTestsConsumer", "TourApiTestsConsumer\TourApiTestsConsumer.csproj", "{10C09C98-BC58-497A-B6F6-DF4FF7D5517D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +21,18 @@ Global
 		{503EC646-2393-491B-B1F7-49C48D207910}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{503EC646-2393-491B-B1F7-49C48D207910}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{503EC646-2393-491B-B1F7-49C48D207910}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2BF9CCFD-53E2-4FB1-B3FB-5456A69BCDB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BF9CCFD-53E2-4FB1-B3FB-5456A69BCDB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BF9CCFD-53E2-4FB1-B3FB-5456A69BCDB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BF9CCFD-53E2-4FB1-B3FB-5456A69BCDB5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CFA9244C-910A-45E1-A3BB-290C2E3222C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFA9244C-910A-45E1-A3BB-290C2E3222C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CFA9244C-910A-45E1-A3BB-290C2E3222C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CFA9244C-910A-45E1-A3BB-290C2E3222C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{94849059-FA57-4556-AC3C-AFE71F95963A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94849059-FA57-4556-AC3C-AFE71F95963A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94849059-FA57-4556-AC3C-AFE71F95963A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94849059-FA57-4556-AC3C-AFE71F95963A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC3BF3A4-3466-4EE4-8E2C-016DDF6D18E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC3BF3A4-3466-4EE4-8E2C-016DDF6D18E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC3BF3A4-3466-4EE4-8E2C-016DDF6D18E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC3BF3A4-3466-4EE4-8E2C-016DDF6D18E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC2FA00A-6AC2-4E3D-A960-61E9997A33A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC2FA00A-6AC2-4E3D-A960-61E9997A33A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC2FA00A-6AC2-4E3D-A960-61E9997A33A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC2FA00A-6AC2-4E3D-A960-61E9997A33A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10C09C98-BC58-497A-B6F6-DF4FF7D5517D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10C09C98-BC58-497A-B6F6-DF4FF7D5517D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10C09C98-BC58-497A-B6F6-DF4FF7D5517D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10C09C98-BC58-497A-B6F6-DF4FF7D5517D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

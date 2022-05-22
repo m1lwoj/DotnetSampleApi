@@ -8,12 +8,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
 
-namespace TourApi
+namespace WeatherApi
 {
     public class Startup
     {
@@ -28,17 +27,16 @@ namespace TourApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
             services.AddMvc();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "My Awesome API",
+                    Title = "Tour API",
                     Version = "v1"
                 });
             });
-
-            services.AddSingleton(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

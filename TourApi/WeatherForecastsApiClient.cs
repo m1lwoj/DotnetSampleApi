@@ -1,5 +1,5 @@
-﻿using DotnetSampleApi2;
-using DotnetSampleApi2.ApiClients.Models;
+﻿using TourApi;
+using TourApi.ApiClients.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
