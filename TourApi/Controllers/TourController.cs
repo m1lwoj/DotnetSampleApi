@@ -8,7 +8,7 @@ using Consumer;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
-namespace DotnetSampleApi2.Controllers
+namespace TourApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]

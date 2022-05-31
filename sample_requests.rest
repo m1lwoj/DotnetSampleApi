@@ -1,0 +1,129 @@
+
+### Get forecast for day
+GET https://localhost:44381/WeatherForecast?day=2020-02-02 HTTP/1.1
+
+### Create forecast for day
+POST https://localhost:44381/WeatherForecast HTTP/1.1
+content-type: application/json; charset=utf-8
+
+{
+    "date": "2020-01-02T00:00:00",
+    "summary": "Bad weather",
+    "temperatureC": 12
+}
+
+### Create forecast for today
+GET https://localhost:44381/WeatherForecast HTTP/1.1
+
+### Send contract to PACT Broker
+PUT http://localhost:9292/pacts/provider/WeatherForecastApi/consumer/TourApi/version/0.0.3 HTTP/1.1
+content-Type: application/json
+
+{
+  "consumer": {
+    "name": "TourApi"
+  },
+  "provider": {
+    "name": "WeatherForecastApi"
+  },
+  "interactions": [
+    {
+      "description": "A valid GET request for GetForecsastForDay",
+      "providerState": "Can get forecasts data for given date",
+      "request": {
+        "method": "get",
+        "path": "/WeatherForecast/2020-02-02T00:00:00Z"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "date": "2020-02-02T00:00:00Z",
+          "temperatureC": 1,
+          "temperatureF": 1
+        },
+        "matchingRules": {
+          "$.body.temperatureC": {
+            "match": "type"
+          },
+          "$.body.temperatureF": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "A valid GET request for Forecast",
+      "providerState": "Can get forecasts data for current date",
+      "request": {
+        "method": "get",
+        "path": "/WeatherForecast"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "date": "2022-05-22T00:00:00Z",
+          "temperatureC": 1,
+          "temperatureF": 1
+        },
+        "matchingRules": {
+          "$.body.temperatureC": {
+            "match": "type"
+          },
+          "$.body.temperatureF": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "A valid POST request for Forecast",
+      "providerState": "Can post forecasts data",
+      "request": {
+        "method": "post",
+        "path": "/WeatherForecast",
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "date": "2020-01-02T00:00:00Z",
+          "temperatureC": 12,
+          "summary": "Bad weather"
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "date": "2020-01-02T00:00:00Z",
+          "temperatureC": 12,
+          "temperatureF": 12,
+          "summary": "Bad weather"
+        },
+        "matchingRules": {
+          "$.body.temperatureC": {
+            "match": "type"
+          },
+          "$.body.temperatureF": {
+            "match": "type"
+          },
+          "$.body.summary": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

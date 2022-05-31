@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>DotnetSampleApi2</RootNamespace>
+    <RootNamespace>TourApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

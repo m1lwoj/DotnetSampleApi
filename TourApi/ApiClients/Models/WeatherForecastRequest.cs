@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace DotnetSampleApi2.ApiClients.Models
+namespace TourApi.ApiClients.Models
 {
     public class WeatherForecastRequest
     {
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         public int TemperatureC { get; set; }
 

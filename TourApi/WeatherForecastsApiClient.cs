@@ -1,5 +1,5 @@
-﻿using DotnetSampleApi2;
-using DotnetSampleApi2.ApiClients.Models;
+﻿using TourApi;
+using TourApi.ApiClients.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -16,7 +16,7 @@ namespace Consumer
             {
                 try
                 {
-                    var response = await client.GetAsync($"/WeatherForecast/{dateTime:yyyy-MM-dd}");
+                    var response = await client.GetAsync($"/WeatherForecast/{dateTime:yyyy-MM-ddTHH:mm:ssZ}");
                     return response;
                 }
                 catch (System.Exception ex)
@@ -56,7 +56,8 @@ namespace Consumer
 
                     if(!response.IsSuccessStatusCode)
                     {
-                        throw new Exception(await response.Content.ReadAsStringAsync());
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        throw new Exception(responseContent);
                     }
 
                     var result = await response.Content.ReadAsStringAsync();
@@ -69,7 +70,7 @@ namespace Consumer
             }
         }
 
-        private static string ToCamelCaseNotation<T>(T model)
+        public static string ToCamelCaseNotation<T>(T model)
         {
             var serializerSettings = new JsonSerializerSettings();
             serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
