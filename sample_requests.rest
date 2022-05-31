@@ -1,6 +1,8 @@
+
+### Get forecast for day
 GET https://localhost:44381/WeatherForecast?day=2020-02-02 HTTP/1.1
-###
 
+### Create forecast for day
 POST https://localhost:44381/WeatherForecast HTTP/1.1
 content-type: application/json; charset=utf-8
 
@@ -9,25 +11,11 @@ content-type: application/json; charset=utf-8
     "summary": "Bad weather",
     "temperatureC": 12
 }
-###
 
-GET https://localhost:44381/WeatherForecast/2020-02-02 HTTP/1.1
-###
-
+### Create forecast for today
 GET https://localhost:44381/WeatherForecast HTTP/1.1
-###
 
-POST https://localhost:44381/WeatherForecast HTTP/1.1
-content-type: application/json; charset=utf-8
-
-{
-    "date": "2020-01-02T00:00:00",
-    "summary": "Bad weather",
-    "temperatureC": 12
-}
-
-###
-
+### Send contract to PACT Broker
 PUT http://localhost:9292/pacts/provider/WeatherForecastApi/consumer/TourApi/version/0.0.3 HTTP/1.1
 content-Type: application/json
 
